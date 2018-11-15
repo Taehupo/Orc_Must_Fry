@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "OMFProjectile.generated.h"
 
 UCLASS()
@@ -38,8 +39,14 @@ public:
 	UPROPERTY(Category = OMFWeapon, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* MeshComponent;
 
+	UPROPERTY(Category = OMFWeapon, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* MeshBodyComponent;
+
 	UPROPERTY(Category = OMFWeapon, EditAnywhere)
 	float Speed;
+
+	UPROPERTY(Category = OMFWeapon, EditAnywhere)
+	UProjectileMovementComponent* projectileComponent;
 
 	//Attributes
 protected:

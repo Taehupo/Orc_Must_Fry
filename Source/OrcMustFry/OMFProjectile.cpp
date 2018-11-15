@@ -13,6 +13,17 @@ AOMFProjectile::AOMFProjectile()
 	//Instantiate root
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 
+	MeshBodyComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshBodyComponent"));
+
+	//Instantiate Projectile movement Component
+	projectileComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Component"));
+	projectileComponent->SetUpdatedComponent(MeshComponent);
+	projectileComponent->InitialSpeed = 1000.0f;
+	projectileComponent->MaxSpeed = 1000.0f;
+	projectileComponent->bRotationFollowsVelocity = true;
+	projectileComponent->bShouldBounce = false;
+	projectileComponent->Bounciness = 0.0f;
+
 	RootComponent = MeshComponent;
 }
 
@@ -42,6 +53,7 @@ void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon)
 	SetActorLocation(Location);
 	MeshComponent->SetEnableGravity(false);
 	MeshComponent->SetAllPhysicsLinearVelocity(Speed * ForwardWeapon);
+	projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
 }
 
 //Behavior from the projectile on hit
