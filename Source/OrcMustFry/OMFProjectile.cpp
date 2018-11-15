@@ -53,7 +53,7 @@ void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon)
 	SetActorLocation(Location);
 	MeshComponent->SetEnableGravity(false);
 	MeshComponent->SetAllPhysicsLinearVelocity(Speed * ForwardWeapon);
-	projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
+	//projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
 }
 
 //Behavior from the projectile on hit
