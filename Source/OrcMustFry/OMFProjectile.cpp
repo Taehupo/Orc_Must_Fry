@@ -51,13 +51,18 @@ void AOMFProjectile::Tick(float DeltaTime)
 void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon)
 {
 	SetActorLocation(Location);
-	MeshComponent->SetEnableGravity(false);
-	MeshComponent->SetAllPhysicsLinearVelocity(Speed * ForwardWeapon);
-	//projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
+	/*MeshComponent->SetEnableGravity(false);
+	MeshComponent->SetAllPhysicsLinearVelocity(Speed * ForwardWeapon);*/
+	projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
 }
 
 //Behavior from the projectile on hit
 void AOMFProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	Destroy();
+	OnValidHit( HitComponent, OtherActor, OtherComp, NormalImpulse, Hit);
+}
+
+void AOMFProjectile::OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	//Do stuff here. This function purely serves to be overloaded.
 }
