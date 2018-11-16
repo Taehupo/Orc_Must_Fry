@@ -61,12 +61,13 @@ void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon)
 	projectileComponent->Velocity = (ForwardWeapon * projectileComponent->InitialSpeed);
 }
 
-//Behavior from the projectile on hit
+//Behavior from the projectile on hit (Linked to delegate, useless to overload. Overload OnValidHit() to define collision behavior instead)
 void AOMFProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	OnValidHit( HitComponent, OtherActor, OtherComp, NormalImpulse, Hit);
 }
 
+//Actual function where collision behavior will occur
 void AOMFProjectile::OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	//Do stuff in daughter classes. This function purely serves to be overloaded. NOT TO EVER IMPLEMENT ANY BEHAVIOR HERE
