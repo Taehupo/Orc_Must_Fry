@@ -13,6 +13,11 @@ void AOMFGrenade::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AOMFGrenade::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	//do Explosion related stuff here lel
+}
+
 void AOMFGrenade::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
@@ -25,5 +30,6 @@ void AOMFGrenade::InitProjectile(FVector Location, FVector ForwardWeapon)
 
 void AOMFGrenade::OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Log, TEXT("I GRENADE, HAZ HIT SOMETING !"));
+	//UE_LOG(LogTemp, Log, TEXT("I GRENADE, HAZ HIT SOMETING !"));
+	//Grenade specific behavior
 }

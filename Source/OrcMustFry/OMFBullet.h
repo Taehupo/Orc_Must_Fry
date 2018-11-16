@@ -32,9 +32,7 @@ public:
 
 	virtual void InitProjectile(FVector Location, FVector ForwardWeapon);
 
-	UFUNCTION()
-		virtual void OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-
+	virtual void OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	
 	
 };

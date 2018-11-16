@@ -40,6 +40,11 @@ void AOMFProjectile::BeginPlay()
 
 }
 
+void AOMFProjectile::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	//Do nothing here. Serves to be overloaded in children.
+}
+
 // Called every frame
 void AOMFProjectile::Tick(float DeltaTime)
 {
@@ -64,5 +69,5 @@ void AOMFProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* 
 
 void AOMFProjectile::OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//Do stuff here. This function purely serves to be overloaded.
+	//Do stuff in daughter classes. This function purely serves to be overloaded. NOT TO EVER IMPLEMENT ANY BEHAVIOR HERE
 }
