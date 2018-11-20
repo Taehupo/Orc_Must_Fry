@@ -14,16 +14,16 @@ void AOMFShotgun::Attack()
 	//Instantiate projectiles with directions directly in sockets
 	if (nullptr != GetWorld())
 	{
-		AOMFBullet* CurrentProjectile = nullptr;
+		AOMFProjectile* CurrentProjectile = nullptr;
 
-		CurrentProjectile = GetWorld()->SpawnActor<AOMFBullet>(ProjectileClass);
+		CurrentProjectile = GetWorld()->SpawnActor<AOMFProjectile>(ProjectileClass);
 
 		if (nullptr != CurrentProjectile && nullptr != CurrentProjectile->MeshComponent)
 		{
 			CurrentProjectile->InitProjectile(MeshComponent->GetSocketLocation(TEXT("ProjectileSocket1")), MeshComponent->GetSocketRotation(TEXT("ProjectileSocket1")).Vector());
 		}
 
-		CurrentProjectile = GetWorld()->SpawnActor<AOMFBullet>(ProjectileClass);
+		CurrentProjectile = GetWorld()->SpawnActor<AOMFProjectile>(ProjectileClass);
 
 		if (nullptr != CurrentProjectile && nullptr != CurrentProjectile->MeshComponent)
 		{
