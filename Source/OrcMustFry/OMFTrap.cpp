@@ -27,6 +27,7 @@ void AOMFTrap::BeginPlay()
 	if (nullptr != MeshComponent)
 	{
 		ColliderBox->OnComponentBeginOverlap.AddDynamic(this, &AOMFTrap::OnTrapBeginOverlap);
+		ColliderBox->OnComponentEndOverlap.AddDynamic(this, &AOMFTrap::OnTrapEndOverlap);
 	}
 	
 }
@@ -48,9 +49,9 @@ void AOMFTrap::OnTrapBeginOverlap(class UPrimitiveComponent* OverlappedComp, cla
 	OnValidBeginOverlap(OverlappedComp ,OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 }
 
-void AOMFTrap::OnTrapEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep)
+void AOMFTrap::OnTrapEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	OnValidEndOverlap(OverlappedComp, OtherActor, OtherComp, OtherBodyIndex, bFromSweep);
+	OnValidEndOverlap(OverlappedComp, OtherActor, OtherComp, OtherBodyIndex);
 }
 
 void AOMFTrap::OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -58,7 +59,7 @@ void AOMFTrap::OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, cl
 
 }
 
-void AOMFTrap::OnValidEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep)
+void AOMFTrap::OnValidEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
 }

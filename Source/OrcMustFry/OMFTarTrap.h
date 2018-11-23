@@ -14,7 +14,8 @@ class ORCMUSTFRY_API AOMFTarTrap : public AOMFTrap
 {
 	GENERATED_BODY()
 	
-	
-	
+public:
+	virtual void OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnValidEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 };
