@@ -45,10 +45,20 @@ void AOMFTrap::InitTrap(FVector Location)
 
 void AOMFTrap::OnTrapBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	OnValidOverlap(OverlappedComp ,OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+	OnValidBeginOverlap(OverlappedComp ,OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 }
 
-void AOMFTrap::OnValidOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AOMFTrap::OnTrapEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep)
+{
+	OnValidEndOverlap(OverlappedComp, OtherActor, OtherComp, OtherBodyIndex, bFromSweep);
+}
+
+void AOMFTrap::OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+
+}
+
+void AOMFTrap::OnValidEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep)
 {
 
 }

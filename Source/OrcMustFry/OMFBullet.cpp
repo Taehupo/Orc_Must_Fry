@@ -24,5 +24,5 @@ void AOMFBullet::InitProjectile(FVector Location, FVector ForwardWeapon)
 
 void AOMFBullet::OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//Bullet Specific Behavior
+	Destroy();
 }

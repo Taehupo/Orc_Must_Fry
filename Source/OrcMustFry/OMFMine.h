@@ -27,6 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	UPROPERTY()
+	class AOrcMustFryCharacter * playerOwner;
 
 	//Methods
 public:
@@ -35,6 +38,6 @@ public:
 
 	virtual void OnValidHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
-	
+	void Explode();
 	
 };

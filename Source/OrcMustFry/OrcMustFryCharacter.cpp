@@ -8,7 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-
+#include "OMFMine.h"
 #include "OMFAttackComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -77,6 +77,9 @@ void AOrcMustFryCharacter::SetupPlayerInputComponent(class UInputComponent* Play
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AOrcMustFryCharacter::OnResetVR);
 
+	//Setup Explosions
+	PlayerInputComponent->BindAction("Explosion", IE_Pressed, this, &AOrcMustFryCharacter::ExplodeMines);
+
 	//Bind attack actions
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, AttackComponent, &UOMFAttackComponent::Attack);
 	PlayerInputComponent->BindAction("Attack", IE_Released, AttackComponent, &UOMFAttackComponent::StopAttack);
@@ -84,6 +87,7 @@ void AOrcMustFryCharacter::SetupPlayerInputComponent(class UInputComponent* Play
 	//Bind Axis to change weapons
 	PlayerInputComponent->BindAxis("ChangeWeapon", AttackComponent, &UOMFAttackComponent::ChangeWeapon);
 
+	
 }
 
 
@@ -141,4 +145,17 @@ void AOrcMustFryCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AOrcMustFryCharacter::ExplodeMines()
+{
+	for (AOMFMine* m : mines)
+	{
+		m->Explode();
+	}
+}
+
+void AOrcMustFryCharacter::AddMine(AOMFMine * mine)
+{
+	mines.Add(mine);
 }

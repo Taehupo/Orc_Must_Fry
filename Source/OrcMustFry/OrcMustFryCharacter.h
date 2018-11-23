@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "OMFCharacter.h"
+#include "OMFMine.h"
 #include "OrcMustFryCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -18,6 +19,10 @@ class AOrcMustFryCharacter : public AOMFCharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Values, meta = (AllowPrivateAccess = "true"))
+	TArray<AOMFMine*> mines;
+
 public:
 	AOrcMustFryCharacter();
 
@@ -58,6 +63,8 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	void ExplodeMines();	
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -68,5 +75,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	void AddMine(AOMFMine* mine);
 };
 
