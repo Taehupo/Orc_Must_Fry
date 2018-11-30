@@ -147,6 +147,7 @@ void AOrcMustFryCharacter::MoveRight(float Value)
 	}
 }
 
+// Explodes all registered mines
 void AOrcMustFryCharacter::ExplodeMines()
 {
 	for (AOMFMine* m : mines)
@@ -155,6 +156,7 @@ void AOrcMustFryCharacter::ExplodeMines()
 	}
 }
 
+//Registers a mine inside the mine array. To be called inside the projectile
 void AOrcMustFryCharacter::AddMine(AOMFMine * mine)
 {
 	mines.Add(mine);

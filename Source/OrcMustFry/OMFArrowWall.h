@@ -22,7 +22,7 @@ class ORCMUSTFRY_API AOMFArrowWall : public AOMFTrap
 	UPROPERTY(EditAnywhere, Category = OMFTrap)
 	float cooldown = 1.5f;
 
-	float timer = 1.5f;
+	float timer = cooldown;
 
 public:
 	UPROPERTY(EditAnywhere, Category = OMFTrap)
