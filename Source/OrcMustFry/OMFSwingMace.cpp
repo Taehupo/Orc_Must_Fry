@@ -24,20 +24,16 @@ void AOMFSwingMace::InitTrap(FVector Location)
 
 void AOMFSwingMace::OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AOrcMustFryCharacter* temp = Cast<AOrcMustFryCharacter>(OtherActor);
-
-	if (temp->IsA(AOrcMustFryCharacter::StaticClass()))
+	if (nullptr != OtherActor && OtherActor->IsA<AOrcMustFryCharacter>())
 	{
-		targetArray.Add(temp);
+		targetArray.Add(Cast<AOrcMustFryCharacter>(OtherActor));
 	}
 }
 
 void AOMFSwingMace::OnValidEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	AOrcMustFryCharacter* temp = Cast<AOrcMustFryCharacter>(OtherActor);
-
-	if (temp->IsA(AOrcMustFryCharacter::StaticClass()))
+	if (nullptr != OtherActor && OtherActor->IsA<AOrcMustFryCharacter>())
 	{
-		targetArray.Remove(temp);
+		targetArray.Remove(Cast<AOrcMustFryCharacter>(OtherActor));
 	}
 }

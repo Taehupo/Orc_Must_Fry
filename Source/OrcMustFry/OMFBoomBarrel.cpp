@@ -5,9 +5,7 @@
 
 void AOMFBoomBarrel::OnValidBeginOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AOMFProjectile* temp = Cast<AOMFProjectile>(OtherActor);
-
-	if (temp->IsA(AOMFProjectile::StaticClass()))
+	if (nullptr != OtherActor && OtherActor->IsA<AOMFProjectile>())
 	{
 		UE_LOG(LogTemp, Log, TEXT("I HAZ BEEN HIT ! I EXPLOOOOOOOOODE"));
 	}
