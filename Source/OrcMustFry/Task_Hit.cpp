@@ -9,12 +9,13 @@
 
 EBTNodeResult::Type UTask_Hit::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	UE_LOG(LogTemp, Log, TEXT("I IZ ATTACKING"));
+	Super::ExecuteTask(OwnerComp, NodeMemory);	
 
 	UOMFAttackComponent* temp = (UOMFAttackComponent*)(OwnerComp.GetAIOwner()->GetPawn()->GetComponentByClass(UOMFAttackComponent::StaticClass()));
 
 	if (nullptr != temp)
 	{
+		UE_LOG(LogTemp, Log, TEXT("I IZ ATTACKING"));
 		temp->Attack();
 
 		return EBTNodeResult::Succeeded;

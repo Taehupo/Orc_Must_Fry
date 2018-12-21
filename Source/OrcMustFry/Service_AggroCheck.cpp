@@ -7,18 +7,47 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "AIController.h"
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISense_Sight.h"
+#include "OMFAIController.h"
 
 void UService_AggroCheck::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-	AOMFCharacter * player = (AOMFCharacter *)UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	AOMFCharacter * player = nullptr;
 
-	float distance = (OwnerComp.GetAIOwner()->GetPawn()->GetActorLocation() - player->GetActorLocation()).Size();
+	AOMFAIController* myController = (AOMFAIController*)(OwnerComp.GetAIOwner());
+	AOMFCharacter* AIChar = (AOMFCharacter*)OwnerComp.GetAIOwner()->GetPawn();
+	float distance;
 
-	if (distance <= 2000.0f)
-	{
-		OwnerComp.GetBlackboardComponent()->SetValueAsObject(TEXT("Target"), player);
-	}	
+		if (nullptr != AIChar)
+		{
+			UAIPerceptionComponent* pComp = myController->GetPerceptionComponent();
 
+			if (nullptr != pComp)
+			{
+				TArray<AActor*> percievedActors;
+
+				pComp->GetCurrentlyPerceivedActors(UAISense_Sight::StaticClass(), percievedActors);
+
+				for (AActor* actor : percievedActors)
+				{
+					player = Cast<AOMFCharacter>(actor);
+					if (nullptr != player)
+					{
+						distance = (AIChar->GetDistanceTo(player));						
+					}
+				}
+			}			
+		}
+
+		if (distance <= 2000.0f)
+		{
+			UBlackboardComponent * BBComp = OwnerComp.GetBlackboardComponent();
+			if (nullptr != BBComp)
+			{
+				BBComp->SetValueAsObject(TEXT("Target"), player);
+			}
+		}
 }
