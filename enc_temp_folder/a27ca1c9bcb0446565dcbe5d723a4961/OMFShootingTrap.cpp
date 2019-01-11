@@ -1,18 +1,23 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "OMFWeaponRanged.h"
+#include "OMFShootingTrap.h"
 
-#include "OMFProjectile.h"
-#include "OMFCharacter.h"
+#include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 
+#include "Projectiles/OMFProjectile.h"
+
+AOMFShootingTrap::AOMFShootingTrap()
+{
+	StartingProjectilePointTag = "ProjSocket";
+
+	NbProjectiles = 1;
+}
+
 // Called when the game starts or when spawned
-void AOMFWeaponRanged::BeginPlay()
+void AOMFShootingTrap::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (nullptr != MeshComponent)
-		MeshComponent->SetCollisionProfileName(TEXT("NoCollision"));
 
 	if (StartingProjectilesPoints.Num() == 0)
 	{
@@ -54,19 +59,13 @@ void AOMFWeaponRanged::BeginPlay()
 	}
 }
 
-void AOMFWeaponRanged::Attack()
-{
-	Super::Attack();
-	SpawnProjectile();
-}
+void AOMFShootingTrap::Attack()
+{	
+	CurrentIndexTarget = 0;
 
-TArray<class AOMFProjectile*> AOMFWeaponRanged::SpawnProjectile()
-{
-	TArray<class AOMFProjectile*> AllProj;
-	int IndexProj = 0;
 	for (auto ProjPoint : StartingProjectilesPoints)
 	{
-		if (nullptr != GetWorld() && IndexProj < NbProjectiles)
+		if (nullptr != GetWorld() && CurrentIndexTarget < NbProjectiles)
 		{
 			AOMFProjectile* CurrentProjectile = nullptr;
 
@@ -76,14 +75,18 @@ TArray<class AOMFProjectile*> AOMFWeaponRanged::SpawnProjectile()
 
 			CurrentProjectile = GetWorld()->SpawnActor<AOMFProjectile>(ProjectileClass, ProjPoint);
 
-			CurrentProjectile->InitProjectile(ProjPoint.GetLocation(), ProjPoint.GetRotation().Vector(), OwnerCharacter->GetGenericTeamId());
+			SetupProjectile(CurrentProjectile, ProjPoint);
 
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Projectile spawned : %s "), *GetNameSafe(CurrentProjectile)));
-
-			AllProj.Add(CurrentProjectile);
+			CurrentIndexTarget++;
 		}
-		IndexProj++;
 	}
 
-	return AllProj;
+}
+
+void AOMFShootingTrap::SetupProjectile(class AOMFProjectile* CurrentProjectile, FTransform _WorldTransform)
+{
+	if (nullptr != CurrentProjectile && nullptr != CurrentProjectile->MeshComponent)
+	{
+		CurrentProjectile->InitProjectile(_WorldTransform.GetLocation(), _WorldTransform.GetRotation().Vector());
+	}
 }

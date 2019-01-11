@@ -4,20 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GenericTeamAgentInterface.h"
 #include "OMFProjectile.generated.h"
-
-ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
-{
-	return A.GetId() != B.GetId() ? ETeamAttitude::Hostile : ETeamAttitude::Friendly;
-}
-
-FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;
 
 DECLARE_DYNAMIC_DELEGATE(FProjectileLifeEnded);
 
 UCLASS()
-class ORCMUSTFRY_API AOMFProjectile : public AActor, public IGenericTeamAgentInterface
+class ORCMUSTFRY_API AOMFProjectile : public AActor
 {
 	GENERATED_BODY()
 	
@@ -39,7 +31,7 @@ public:
 	//Methods
 public:
 
-	virtual void InitProjectile(FVector Location, FVector ForwardWeapon, FGenericTeamId Team);
+	virtual void InitProjectile(FVector Location, FVector ForwardWeapon);
 	
 	UFUNCTION()
 	virtual void OnProjectileHit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
@@ -54,8 +46,6 @@ public:
 
 	virtual bool IsValidActorForCollision(AActor* _OtherActor);
 
-	virtual FGenericTeamId GetGenericTeamId() const override { return OMFTeamId; }
-
 	//Attributes
 public:
 
@@ -69,8 +59,6 @@ public:
 	class UOMFProjectileComponent* ProjectileComponent;
 
 	FProjectileLifeEnded EndLifeDel;
-
-	FGenericTeamId OMFTeamId;
 
 	//Attributes
 protected:

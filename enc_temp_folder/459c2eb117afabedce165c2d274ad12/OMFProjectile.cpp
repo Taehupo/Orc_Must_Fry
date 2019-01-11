@@ -5,7 +5,7 @@
 #include "OMFProjectileComponent.h"
 #include "OMFTrap.h"
 #include "OMFWeapon.h"
-#include "OMFCharacter.h"
+
 #include "Components/StaticMeshComponent.h"
 #include "Particles/Emitter.h"
 
@@ -37,8 +37,6 @@ void AOMFProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OMFTeamId.SetAttitudeSolver(OMFAttitudeTeamSolver);
-
 	if (nullptr != MeshComponent)
 	{
 		//MeshComponent->OnComponentHit.AddUniqueDynamic(this, &AOMFProjectile::OnProjectileHit);
@@ -63,14 +61,12 @@ void AOMFProjectile::Tick(float DeltaTime)
 
 }
 
-void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon, FGenericTeamId Team)
+void AOMFProjectile::InitProjectile(FVector Location,FVector ForwardWeapon)
 {
 	//SetActorLocation(Location);
 	//SetActorLocationAndRotation(Location,FRotationMatrix::MakeFromX(ForwardWeapon).ToQuat());
 	if (nullptr != ProjectileComponent)
 		ProjectileComponent->Velocity = ForwardWeapon * ProjectileComponent->InitialSpeed;
-
-	OMFTeamId = Team;
 }
 
 void AOMFProjectile::OnProjectileHit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
@@ -83,21 +79,10 @@ void AOMFProjectile::OnProjectileHit(UPrimitiveComponent* OverlappedComponent, A
 
 bool AOMFProjectile::IsValidActorForCollision(AActor* _OtherActor)
 {
-	/*if (nullptr != _OtherActor && !_OtherActor->IsA<AOMFProjectile>() && !_OtherActor->IsA<AOMFTrap>() && !_OtherActor->IsA<AOMFWeapon>())
+	if (nullptr != _OtherActor && !_OtherActor->IsA<AOMFProjectile>() && !_OtherActor->IsA<AOMFTrap>() && !_OtherActor->IsA<AOMFWeapon>())
 		return true;
 
-	return false;*/
-
-	if ((nullptr != _OtherActor && !_OtherActor->IsA<AOMFProjectile>() && !_OtherActor->IsA<AOMFTrap>() && !_OtherActor->IsA<AOMFWeapon>()))
-	{
-		AOMFCharacter * temp = Cast<AOMFCharacter>(_OtherActor);
-		if (temp != nullptr && OMFAttitudeTeamSolver(this->OMFTeamId, temp->GetGenericTeamId()) == ETeamAttitude::Hostile)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("J'ai tappé un méchant !"));
-			return true;
-		}
-	}
-	return false;		
+	return false;
 }
 
 //void AOMFProjectile::OMFProjectileHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

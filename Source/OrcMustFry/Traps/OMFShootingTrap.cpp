@@ -87,6 +87,6 @@ void AOMFShootingTrap::SetupProjectile(class AOMFProjectile* CurrentProjectile, 
 {
 	if (nullptr != CurrentProjectile && nullptr != CurrentProjectile->MeshComponent)
 	{
-		CurrentProjectile->InitProjectile(_WorldTransform.GetLocation(), _WorldTransform.GetRotation().Vector());
+		CurrentProjectile->InitProjectile(_WorldTransform.GetLocation(), _WorldTransform.GetRotation().Vector(), GetGenericTeamId());
 	}
 }

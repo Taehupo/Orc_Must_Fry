@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GenericTeamAgentInterface.h"
 #include "OMFTrap.generated.h"
 
 UCLASS()
-class ORCMUSTFRY_API AOMFTrap : public AActor, public IGenericTeamAgentInterface
+class ORCMUSTFRY_API AOMFTrap : public AActor
 {
 	GENERATED_BODY()
 
@@ -21,8 +20,6 @@ public:
 
 	virtual bool CanAttack();
 
-	virtual FGenericTeamId GetGenericTeamId() const override { return OMFTeamId; }
-
 	//Attributes
 public:
 
@@ -31,7 +28,4 @@ public:
 
 	UPROPERTY(Category = OMFWeapon, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class USceneComponent* SceneComponent;
-
-	UPROPERTY(Category = "TeamID", EditAnywhere, BlueprintReadWrite)
-		FGenericTeamId OMFTeamId;
 };

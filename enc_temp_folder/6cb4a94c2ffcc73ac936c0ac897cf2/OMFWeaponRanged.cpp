@@ -3,7 +3,7 @@
 #include "OMFWeaponRanged.h"
 
 #include "OMFProjectile.h"
-#include "OMFCharacter.h"
+
 #include "Components/StaticMeshComponent.h"
 
 // Called when the game starts or when spawned
@@ -76,7 +76,7 @@ TArray<class AOMFProjectile*> AOMFWeaponRanged::SpawnProjectile()
 
 			CurrentProjectile = GetWorld()->SpawnActor<AOMFProjectile>(ProjectileClass, ProjPoint);
 
-			CurrentProjectile->InitProjectile(ProjPoint.GetLocation(), ProjPoint.GetRotation().Vector(), OwnerCharacter->GetGenericTeamId());
+			CurrentProjectile->InitProjectile(ProjPoint.GetLocation(), ProjPoint.GetRotation().Vector());
 
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Projectile spawned : %s "), *GetNameSafe(CurrentProjectile)));
 
