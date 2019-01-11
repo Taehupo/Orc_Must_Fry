@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GenericTeamAgentInterface.h"
 #include "OMFCharacter.generated.h"
 
 UCLASS()
-class ORCMUSTFRY_API AOMFCharacter : public ACharacter
+class ORCMUSTFRY_API AOMFCharacter : public ACharacter, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 
@@ -26,11 +27,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual FGenericTeamId GetGenericTeamId() const override { return OMFTeamId; }
+
+	void PossessedBy(AController* newController);
+
 	//Methods
 public:
 
 	//Attributes
 protected:
+
+	UPROPERTY(Category = "TeamID", EditAnywhere, BlueprintReadWrite)
+	FGenericTeamId OMFTeamId;
 
 	UPROPERTY(Category = OMFCharacter, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UOMFAttackComponent* AttackComponent;

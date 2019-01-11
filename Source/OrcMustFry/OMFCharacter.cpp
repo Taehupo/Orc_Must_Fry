@@ -1,9 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OMFCharacter.h"
-
+#include "OMFAIController.h"
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISense_Sight.h"
 #include "OMFAttackComponent.h"
 
+ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
+{
+	return A.GetId() != B.GetId() ? ETeamAttitude::Hostile : ETeamAttitude::Friendly;
+}
+
+FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;
 
 // Sets default values
 AOMFCharacter::AOMFCharacter()
@@ -19,6 +27,7 @@ AOMFCharacter::AOMFCharacter()
 void AOMFCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	
 }
 
@@ -36,3 +45,23 @@ void AOMFCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 }
 
+void AOMFCharacter::PossessedBy(AController* newController)
+{
+	Super::PossessedBy(newController);
+
+	AOMFAIController* test = Cast<AOMFAIController>(newController);
+
+	if (nullptr != test)
+	{
+		OMFTeamId.SetAttitudeSolver(OMFAttitudeTeamSolver);
+		
+		test->SetGenericTeamId(OMFTeamId);		
+	}
+
+	UAIPerceptionSystem* AIPerceptionSys = UAIPerceptionSystem::GetCurrent(GetWorld());
+
+	if (AIPerceptionSys != nullptr)
+	{
+		AIPerceptionSys->RegisterPerceptionStimuliSource(GetWorld(), UAISense_Sight::StaticClass(), this);
+	}
+}
