@@ -40,7 +40,7 @@ void AOMFAnimationTrap::OnMeshBeginOverlap(UPrimitiveComponent* OverlappedCompon
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar)
+	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Actor : %s Hit"), *GetNameSafe(this)));
 	}

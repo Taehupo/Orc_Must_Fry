@@ -13,7 +13,7 @@ void AOMFPermanentTrap::OnTriggerBeginOverlap(UPrimitiveComponent* OverlappedCom
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar)
+	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		Attack();
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Coucou AOMFPermanentTrap"));
@@ -24,7 +24,7 @@ void AOMFPermanentTrap::OnTriggerEndOverlap(UPrimitiveComponent* OverlappedCompo
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar)
+	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		FinishAttack();
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Byebye AOMFPermanentTrap"));

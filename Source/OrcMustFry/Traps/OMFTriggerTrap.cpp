@@ -93,7 +93,7 @@ void AOMFTriggerTrap::OnTriggerBeginOverlap(UPrimitiveComponent* OverlappedCompo
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar)
+	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		OverlappedActors.AddUnique(OtherChar);
 		//NbTargets++;
@@ -105,7 +105,7 @@ void AOMFTriggerTrap::OnTriggerEndOverlap(UPrimitiveComponent* OverlappedCompone
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar)
+	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		OverlappedActors.Remove(OtherChar);
 		//NbTargets--;
