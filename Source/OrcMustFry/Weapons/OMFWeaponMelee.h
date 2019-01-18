@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "OMFTypes.h"
 #include "OMFWeapon.h"
 #include "OMFWeaponMelee.generated.h"
 

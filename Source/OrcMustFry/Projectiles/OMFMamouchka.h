@@ -20,7 +20,7 @@ public:
 	
 	//Methods
 public:
-	virtual void InitProjectile(FVector Location, FVector ForwardWeapon);
+	virtual void InitProjectile(FVector Location, FVector ForwardWeapon, FGenericTeamId team);
 
 	virtual void OnLifeEnded();
 

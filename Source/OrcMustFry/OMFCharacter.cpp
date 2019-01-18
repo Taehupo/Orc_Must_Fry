@@ -6,13 +6,6 @@
 #include "Perception/AISense_Sight.h"
 #include "OMFAttackComponent.h"
 
-ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
-{
-	return A.GetId() != B.GetId() ? ETeamAttitude::Hostile : ETeamAttitude::Friendly;
-}
-
-FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;
-
 // Sets default values
 AOMFCharacter::AOMFCharacter()
 {
@@ -53,7 +46,7 @@ void AOMFCharacter::PossessedBy(AController* newController)
 
 	if (nullptr != test)
 	{
-		OMFTeamId.SetAttitudeSolver(OMFAttitudeTeamSolver);
+		OMFTeamId.SetAttitudeSolver(UUtilitaries::OMFAttitudeTeamSolver);
 		
 		test->SetGenericTeamId(OMFTeamId);		
 	}

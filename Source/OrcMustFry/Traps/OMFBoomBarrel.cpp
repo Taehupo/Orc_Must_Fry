@@ -22,7 +22,7 @@ void AOMFBoomBarrel::OnMeshBeginOverlap(UPrimitiveComponent* OverlappedComponent
 {
 	AOMFProjectile* OtherChar = Cast<AOMFProjectile>(OtherActor);
 
-	if (nullptr != OtherChar && GetLifeSpan() == 0.f)
+	if (nullptr != OtherChar && GetLifeSpan() == 0.f && UUtilitaries::OMFAttitudeTeamSolver(OMFTeamId, OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		Attack();
 		SetLifeSpan(3.f);

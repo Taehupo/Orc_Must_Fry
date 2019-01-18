@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GenericTeamAgentInterface.h"
+#include "OMFTypes.h"
 #include "OMFCharacter.generated.h"
 
 UCLASS()

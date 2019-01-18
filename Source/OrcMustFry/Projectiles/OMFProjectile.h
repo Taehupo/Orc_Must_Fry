@@ -5,14 +5,15 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GenericTeamAgentInterface.h"
+#include "OMFTypes.h"
 #include "OMFProjectile.generated.h"
 
-ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
+/*ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
 {
 	return A.GetId() != B.GetId() ? ETeamAttitude::Hostile : ETeamAttitude::Friendly;
 }
 
-FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;
+FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;*/
 
 DECLARE_DYNAMIC_DELEGATE(FProjectileLifeEnded);
 
