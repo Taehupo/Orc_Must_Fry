@@ -7,6 +7,10 @@
 #include "OMFWeapon.h"
 #include "OMFCharacter.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/Actor.h"
+#include "Engine/World.h"
+#include "Public/TimerManager.h"
+#include "OMFBoomBarrel.h"
 #include "Particles/Emitter.h"
 
 // Sets default values
@@ -36,8 +40,6 @@ AOMFProjectile::AOMFProjectile()
 void AOMFProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	OMFTeamId.SetAttitudeSolver(OMFAttitudeTeamSolver);
 
 	if (nullptr != MeshComponent)
 	{
@@ -88,10 +90,10 @@ bool AOMFProjectile::IsValidActorForCollision(AActor* _OtherActor)
 
 	return false;*/
 
-	if ((nullptr != _OtherActor && !_OtherActor->IsA<AOMFProjectile>() && !_OtherActor->IsA<AOMFTrap>() && !_OtherActor->IsA<AOMFWeapon>()))
+	if ((nullptr != _OtherActor && !_OtherActor->IsA<AOMFProjectile>() && (!_OtherActor->IsA<AOMFTrap>() || _OtherActor->IsA<AOMFBoomBarrel>()) && !_OtherActor->IsA<AOMFWeapon>()))
 	{
 		AOMFCharacter * temp = Cast<AOMFCharacter>(_OtherActor);
-		if (temp != nullptr && OMFAttitudeTeamSolver(this->OMFTeamId, temp->GetGenericTeamId()) == ETeamAttitude::Hostile)
+		if (temp != nullptr && UUtilitaries::OMFAttitudeTeamSolver(this->OMFTeamId, temp->GetGenericTeamId()) == ETeamAttitude::Hostile)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("J'ai tappé un méchant !"));
 			return true;

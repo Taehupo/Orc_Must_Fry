@@ -3,7 +3,7 @@
 #include "OMFWeaponMelee.h"
 
 #include "Components/StaticMeshComponent.h"
-
+#include "OMFCharacter.h"
 #include "ActorSequenceComponent.h"
 
 AOMFWeaponMelee::AOMFWeaponMelee()
@@ -30,8 +30,14 @@ void AOMFWeaponMelee::Attack()
 
 		for (auto Actor : CollisionedActors)
 		{
-			Actor->Destroy();
+			if (Actor->IsA<AOMFCharacter>())
+			{
+				AOMFCharacter* temp = Cast<AOMFCharacter>(Actor);
+				if (temp != nullptr && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), temp->GetGenericTeamId()) == ETeamAttitude::Hostile)
+				{
+					Actor->Destroy();
+				}
+			}			
 		}
-
 	}
 }

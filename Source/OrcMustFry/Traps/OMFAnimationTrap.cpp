@@ -3,7 +3,7 @@
 #include "OMFAnimationTrap.h"
 
 #include "Components/StaticMeshComponent.h"
-
+#include "Engine.h"
 #include "OMFCharacter.h"
 
 AOMFAnimationTrap::AOMFAnimationTrap()
@@ -40,7 +40,7 @@ void AOMFAnimationTrap::OnMeshBeginOverlap(UPrimitiveComponent* OverlappedCompon
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
+	if (nullptr != OtherChar && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Actor : %s Hit"), *GetNameSafe(this)));
 	}

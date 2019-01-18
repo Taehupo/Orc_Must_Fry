@@ -7,12 +7,12 @@
 #include "GenericTeamAgentInterface.h"
 #include "OMFTrap.generated.h"
 
-ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
+/*ETeamAttitude::Type OMFTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
 {
 	return A.GetId() != B.GetId() ? ETeamAttitude::Hostile : ETeamAttitude::Friendly;
 }
 
-FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;
+FGenericTeamId::FAttitudeSolverFunction* OMFAttitudeTeamSolver = &OMFTeamAttitudeSolver;*/
 
 UCLASS()
 class ORCMUSTFRY_API AOMFTrap : public AActor, public IGenericTeamAgentInterface

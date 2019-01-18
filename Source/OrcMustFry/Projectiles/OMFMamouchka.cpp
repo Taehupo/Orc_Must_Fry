@@ -15,9 +15,11 @@ void AOMFMamouchka::BeginPlay()
 	Super::BeginPlay();
 }
 
-void AOMFMamouchka::InitProjectile(FVector Location, FVector ForwardWeapon)
+void AOMFMamouchka::InitProjectile(FVector Location, FVector ForwardWeapon, FGenericTeamId team)
 {
 	CurrentMamouchkaPawn = GetWorld()->SpawnActor<AOMFMamouchkaPawn>(MamouchkaPawnClass);
+
+	OMFTeamId = team;
 
 	if (nullptr != CurrentMamouchkaPawn && nullptr != CurrentMamouchkaPawn->ProjectileComponent)
 	{

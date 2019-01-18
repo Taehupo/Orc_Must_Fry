@@ -4,7 +4,8 @@
 
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
-
+#include "GameFramework/Actor.h"
+#include "Engine.h"
 #include "OMFCharacter.h"
 
 // Sets default values
@@ -93,7 +94,7 @@ void AOMFTriggerTrap::OnTriggerBeginOverlap(UPrimitiveComponent* OverlappedCompo
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
+	if (nullptr != OtherChar && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		OverlappedActors.AddUnique(OtherChar);
 		//NbTargets++;
@@ -105,7 +106,7 @@ void AOMFTriggerTrap::OnTriggerEndOverlap(UPrimitiveComponent* OverlappedCompone
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
+	if (nullptr != OtherChar && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		OverlappedActors.Remove(OtherChar);
 		//NbTargets--;

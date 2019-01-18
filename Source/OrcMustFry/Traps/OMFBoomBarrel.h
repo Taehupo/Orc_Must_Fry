@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Traps/OMFTriggerTrap.h"
+#include "OMFTypes.h"
 #include "OMFBoomBarrel.generated.h"
 
 /**

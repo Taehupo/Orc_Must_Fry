@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OMFPermanentTrap.h"
-
+#include "Engine.h"
 #include "OMFCharacter.h"
 
 AOMFPermanentTrap::AOMFPermanentTrap()
@@ -13,7 +13,7 @@ void AOMFPermanentTrap::OnTriggerBeginOverlap(UPrimitiveComponent* OverlappedCom
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
+	if (nullptr != OtherChar && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		Attack();
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Coucou AOMFPermanentTrap"));
@@ -24,7 +24,7 @@ void AOMFPermanentTrap::OnTriggerEndOverlap(UPrimitiveComponent* OverlappedCompo
 {
 	AOMFCharacter* OtherChar = Cast<AOMFCharacter>(OtherActor);
 
-	if (nullptr != OtherChar && OMFTeamAttitudeSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
+	if (nullptr != OtherChar && UUtilitaries::OMFAttitudeTeamSolver(GetGenericTeamId(), OtherChar->GetGenericTeamId()) == ETeamAttitude::Hostile)
 	{
 		FinishAttack();
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Byebye AOMFPermanentTrap"));
