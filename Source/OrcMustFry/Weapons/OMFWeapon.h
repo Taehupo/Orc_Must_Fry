@@ -7,8 +7,6 @@
 #include "GenericTeamAgentInterface.h"
 #include "OMFWeapon.generated.h"
 
-
-
 UCLASS()
 class ORCMUSTFRY_API AOMFWeapon : public AActor, public IGenericTeamAgentInterface
 {
@@ -29,9 +27,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	
+	virtual void Tick(float DeltaTime) override;	
 
 	//Methods
 public:

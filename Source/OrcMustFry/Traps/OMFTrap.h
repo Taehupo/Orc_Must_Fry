@@ -41,4 +41,6 @@ public:
 
 	UPROPERTY(Category = "TeamID", EditAnywhere, BlueprintReadWrite)
 		FGenericTeamId OMFTeamId;
+
+	int32 trapSize;
 };

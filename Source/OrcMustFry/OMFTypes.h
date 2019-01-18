@@ -20,6 +20,8 @@ enum EOMFWeapon
 
 	Weapon_Shotgun	UMETA(DisplayName = "Shotgun"),
 
+	WEAPON_BUILD	UMETA(DisplayName = "Trap Building Weapon"),
+
 	Weapon_MAX		UMETA(Hidden),
 };
 

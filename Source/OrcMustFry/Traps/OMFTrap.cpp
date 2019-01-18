@@ -19,6 +19,7 @@ AOMFTrap::AOMFTrap()
 		MeshComponent->SetupAttachment(SceneComponent);
 	}
 
+	trapSize = 50.0f;
 }
 
 bool AOMFTrap::CanAttack()
