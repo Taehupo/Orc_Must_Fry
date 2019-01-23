@@ -40,6 +40,8 @@ public:
 
 	void ChangeCurrentWeapon();
 
+	void ChangeCurrentTrap();
+
 	//Attributes
 protected:
 

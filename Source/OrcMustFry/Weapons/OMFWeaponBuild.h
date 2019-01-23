@@ -26,17 +26,17 @@ public:
 
 		virtual void Tick(float DeltaTime) override;
 
-protected:
-	AOMFTrap * SpawnTrap();
+		int32 trapIndex;
 
-	AOMFTrap* currentTrap;
+		UPROPERTY(EditAnywhere, Category = Trap)
+			TArray<TSubclassOf<AOMFTrap>> trapClasses;
+
+		AOMFTrap* currentTrap;
+
+protected:
+	AOMFTrap * SpawnTrap();	
 
 	UPROPERTY(EditAnywhere, Category = Trap)
 		TEnumAsByte<EOMFTraps> currentTrapType;
-
-	UPROPERTY(EditAnywhere, Category = Trap)
-		TArray<TSubclassOf<AOMFTrap>> trapClasses;
-
-	int32 trapIndex;
 	
 };

@@ -35,25 +35,32 @@ enum EOMFCharacterState
 UENUM(BlueprintType)
 enum EOMFTraps
 {
-	TRAP_NONE        UMETA(DisplayName = "None"),
+	TRAP_NONE			  UMETA(DisplayName = "None"),
 
 	TRAP_ARROWWALL        UMETA(DisplayName = "Arrow Wall"),
 
-	TRAP_BALLISTA    UMETA(DisplayName = "Ballista"),
+	TRAP_BALLISTA		  UMETA(DisplayName = "Ballista"),
 
-	TRAP_BLADETORNADO    UMETA(DisplayName = "Blade Tornado"),
-	TRAP_BLIZZARDTOWER   UMETA(DisplayName = "Blizzard Tower"),
-	TRAP_FIRETOWER   UMETA(DisplayName = "Fire Tower"),
-	TRAP_ICETOWER   UMETA(DisplayName = "IceT ower"),
-	TRAP_TAR    UMETA(DisplayName = "Tar"),
+	TRAP_BLADETORNADO     UMETA(DisplayName = "Blade Tornado"),
+	TRAP_BLIZZARDTOWER    UMETA(DisplayName = "Blizzard Tower"),
+	TRAP_FIRETOWER		  UMETA(DisplayName = "Fire Tower"),
+	TRAP_ICETOWER		  UMETA(DisplayName = "IceT ower"),
+	TRAP_TAR			  UMETA(DisplayName = "Tar"),
 
-	TRAP_BOMBER    UMETA(DisplayName = "Bomber"),
-	TRAP_BOOMBARREL    UMETA(DisplayName = "Boom Barrel"),
+	TRAP_BOMBER			  UMETA(DisplayName = "Bomber"),
+	TRAP_BOOMBARREL		  UMETA(DisplayName = "Boom Barrel"),
 
-	TRAP_SPIKE    UMETA(DisplayName = "Spike"),
-	TRAP_SWINGMACE    UMETA(DisplayName = "Swing Mace"),
+	TRAP_SPIKE			  UMETA(DisplayName = "Spike"),
+	TRAP_SWINGMACE		  UMETA(DisplayName = "Swing Mace"),
 
-	TRAP_MAX        UMETA(Hidden),
+	TRAP_MAX			  UMETA(Hidden),
+};
+
+UENUM()
+enum EOMFPlayerState
+{
+	ATTACKING,
+	BUILDING,
 };
 
 UCLASS()

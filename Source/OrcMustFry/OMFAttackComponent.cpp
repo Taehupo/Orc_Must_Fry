@@ -4,8 +4,10 @@
 
 #include "Weapons/OMFWeapon.h"
 #include "OMFCharacter.h"
-
+#include "Weapons/OMFWeaponBuild.h"
+#include "Traps/OMFTrap.h"
 #include "Engine/World.h"
+#include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/SkeletalMeshSocket.h"
 
@@ -80,29 +82,63 @@ void UOMFAttackComponent::StopAttack()
 
 void UOMFAttackComponent::ChangeWeapon(float Value)
 {
-	if (Value == 0)
-		return;
-
-	if (Value > 0)
+	if (OwnerCharacter->state == EOMFPlayerState::ATTACKING)
 	{
-		IndexWeapon += 1;
-	}
-	else
-	{
-		IndexWeapon -= 1;
-	}
+		if (Value == 0)
+			return;
 
-	if (IndexWeapon < 0)
-	{
-		IndexWeapon = WeaponClasses.Num() - 1;
-	}
+		if (Value > 0)
+		{
+			IndexWeapon += 1;
+		}
+		else
+		{
+			IndexWeapon -= 1;
+		}
 
-	if (IndexWeapon >= WeaponClasses.Num())
-	{
-		IndexWeapon = 0;
-	}
+		if (IndexWeapon < 0)
+		{
+			IndexWeapon = WeaponClasses.Num() - 1;
+		}
 
-	ChangeCurrentWeapon();
+		if (IndexWeapon >= WeaponClasses.Num())
+		{
+			IndexWeapon = 0;
+		}
+
+		ChangeCurrentWeapon();
+	}
+	else if (OwnerCharacter->state == EOMFPlayerState::BUILDING)
+	{
+		if (Value == 0)
+			return;
+
+		AOMFWeaponBuild * weapon = Cast<AOMFWeaponBuild>(CurrentWeapon);
+
+		if (nullptr != weapon)
+		{
+			if (Value > 0)
+			{
+				weapon->trapIndex += 1;
+			}
+			else
+			{
+				weapon->trapIndex -= 1;
+			}
+
+			if (weapon->trapIndex < 0)
+			{
+				weapon->trapIndex = weapon->trapClasses.Num() - 1;
+			}
+
+			if (weapon->trapIndex >= weapon->trapClasses.Num())
+			{
+				weapon->trapIndex = 0; 
+			}
+
+			ChangeCurrentTrap();
+		}		
+	}	
 }
 
 void UOMFAttackComponent::ChangeCurrentWeapon()
@@ -118,7 +154,26 @@ void UOMFAttackComponent::ChangeCurrentWeapon()
 			CurrentWeapon->GetRootComponent()->AttachTo(OwnerCharacter->GetMesh(), TEXT("WeaponSocket"), EAttachLocation::KeepRelativeOffset);
 			CurrentWeapon->OwnerCharacter = OwnerCharacter;
 			TimeSinceLastAttack = CurrentWeapon->AttackSpeed;
+			if (CurrentWeapon->IsA<AOMFWeaponBuild>())
+			{
+				OwnerCharacter->state = EOMFPlayerState::BUILDING;
+			}
 		}
+	}
+}
+
+void UOMFAttackComponent::ChangeCurrentTrap()
+{
+	AOMFWeaponBuild * weapon = Cast<AOMFWeaponBuild>(CurrentWeapon);
+
+
+	if (nullptr != GetWorld() && nullptr != weapon && weapon->trapClasses.Num() > weapon->trapIndex)
+	{
+		if (weapon->currentTrap != nullptr)
+			weapon->currentTrap->Destroy();
+
+		weapon->currentTrap = GetWorld()->SpawnActor<AOMFTrap>(weapon->trapClasses[weapon->trapIndex]);
+		weapon->currentTrap->MeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
 

@@ -34,7 +34,7 @@ public:
 
 	//Methods
 public:
-
+	EOMFPlayerState state;
 	//Attributes
 protected:
 
@@ -43,4 +43,6 @@ protected:
 
 	UPROPERTY(Category = OMFCharacter, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UOMFAttackComponent* AttackComponent;
+
+	
 };
