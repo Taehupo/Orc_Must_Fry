@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "OMFStartAI.h"
+#include "OMFEndAI.h"
 #include "OrcMustFryGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -13,6 +15,12 @@ class AOrcMustFryGameMode : public AGameModeBase
 
 public:
 	AOrcMustFryGameMode();
+
+	virtual void BeginPlay() override;
+
+	TArray<AOMFStartAI*> aiSpawnPoints;
+
+	TArray<AOMFEndAI*> aiTargets;
 };
 
 

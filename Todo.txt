@@ -1,0 +1,15 @@
+Make class/BP : 
+
+GameMode DONE
+CheatManager
+PlayerController DONE
+GamePlayStatics
+
+EndAI (Actor marking the ending point for the AI in the level)
+StartAi (Actor marking the spawning point for the AI)
+
+The gamemode will get this actors at the beginPlay and store them
+
+CheatManager:
+
+Add a SpawnAI function that can be called in the console to spawn an AI at the Spawn/start AI actor and start her behavior

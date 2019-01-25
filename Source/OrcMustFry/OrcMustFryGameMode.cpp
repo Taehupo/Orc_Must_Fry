@@ -3,6 +3,8 @@
 #include "OrcMustFryGameMode.h"
 #include "OrcMustFryCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
+#include "EngineUtils.h"
 
 AOrcMustFryGameMode::AOrcMustFryGameMode()
 {
@@ -11,5 +13,20 @@ AOrcMustFryGameMode::AOrcMustFryGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}	
+}
+
+void AOrcMustFryGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	for (TActorIterator<AOMFStartAI> ActorItr(GetWorld()) ; ActorItr; ++ActorItr)
+	{
+		aiSpawnPoints.Add(*ActorItr);
+	}
+
+	for (TActorIterator<AOMFEndAI> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		aiTargets.Add(*ActorItr);
 	}
 }

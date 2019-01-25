@@ -39,7 +39,6 @@ public:
 	virtual FGenericTeamId GetGenericTeamId() const override { return OMFTeamID; }
 
 
-
 	//Attributes
 public:
 	UPROPERTY(EditAnywhere, Category = OMFAttack)
@@ -51,11 +50,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = OMFAttack)
 		FColor NoBuildColor;
 
-	//Attributes
-protected:
-
 	UPROPERTY(Category = TeamID, EditAnywhere, BlueprintReadWrite)
-	FGenericTeamId OMFTeamID;
+		FGenericTeamId OMFTeamID;
+	
+
+	//Attributes
+protected:		
 
 	UPROPERTY(Category = OMFCharacter, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UOMFAttackComponent* AttackComponent;
