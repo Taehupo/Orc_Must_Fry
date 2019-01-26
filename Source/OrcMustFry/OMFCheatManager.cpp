@@ -10,7 +10,7 @@ void UOMFCheatManager::SpawnAI(int32 spawnerIndex, int32 endIndex, int32 team)
 	if (nullptr != gameMode)
 	{
 		FRotator rot = FRotator(0, 0, 0);
-		AOMFCharacter * temp = GetWorld()->SpawnActor<AOMFCharacter>(aiChar->GetClass(), 
+		AOMFCharacter * temp = GetWorld()->SpawnActor<AOMFCharacter>(aiChar->GetDefaultObject()->GetClass(),
 			gameMode->aiSpawnPoints[spawnerIndex]->GetActorLocation(), rot);
 		if (nullptr != temp)
 		{
