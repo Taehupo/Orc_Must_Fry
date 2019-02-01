@@ -2,6 +2,8 @@
 
 #include "OMFCheatManager.h"
 #include "OrcMustFryGameMode.h"
+#include "Classes/AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Engine.h"
 
 void UOMFCheatManager::SpawnAI(int32 spawnerIndex, int32 endIndex, int32 team)
@@ -15,6 +17,12 @@ void UOMFCheatManager::SpawnAI(int32 spawnerIndex, int32 endIndex, int32 team)
 		if (nullptr != temp)
 		{
 			temp->OMFTeamID = team;
+			AAIController* test = Cast<AAIController>(temp->GetController());
+				
+			if (nullptr != test)
+			{
+				test->GetBlackboardComponent()->SetValueAsObject(TEXT("Target"), gameMode->aiTargets[spawnerIndex]);
+			}				
 		}		
 	}
 	
