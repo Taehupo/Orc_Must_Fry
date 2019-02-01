@@ -25,12 +25,8 @@ void AOrcMustFryGameMode::BeginPlay()
 		aiSpawnPoints.Add(*ActorItr);
 	}
 
-	UE_LOG(LogTemp,Log,TEXT("Number of StartPoints : %d"), aiSpawnPoints.Num())
-
 	for (TActorIterator<AOMFEndAI> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		aiTargets.Add(*ActorItr);
 	}
-
-	UE_LOG(LogTemp, Log, TEXT("Number of EndPoints : %d"), aiTargets.Num())
 }

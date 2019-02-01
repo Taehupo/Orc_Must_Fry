@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "OMFStartAI.h"
 #include "OMFEndAI.h"
+#include "OMFWave.h"
 #include "OrcMustFryGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -21,6 +22,9 @@ public:
 	TArray<AOMFStartAI*> aiSpawnPoints;
 
 	TArray<AOMFEndAI*> aiTargets;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FOMFWave> waveList;
 };
 
 

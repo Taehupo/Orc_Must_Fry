@@ -16,7 +16,7 @@ void UOMFCheatManager::SpawnAI(int32 spawnerIndex, int32 endIndex, int32 team)
 			gameMode->aiSpawnPoints[spawnerIndex]->GetActorLocation(), rot);
 		if (nullptr != temp)
 		{
-			temp->OMFTeamID = team;
+			temp->SetGenericTeamId(team);
 			AAIController* test = Cast<AAIController>(temp->GetController());
 				
 			if (nullptr != test)
