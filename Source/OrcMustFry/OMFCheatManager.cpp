@@ -21,7 +21,7 @@ void UOMFCheatManager::SpawnAI(int32 spawnerIndex, int32 endIndex, int32 team)
 				
 			if (nullptr != test)
 			{
-				test->GetBlackboardComponent()->SetValueAsObject(TEXT("Target"), gameMode->aiTargets[spawnerIndex]);
+				test->GetBlackboardComponent()->SetValueAsObject(TEXT("EndTarget"), gameMode->aiTargets[endIndex]);
 			}				
 		}		
 	}
