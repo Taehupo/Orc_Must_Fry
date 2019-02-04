@@ -21,7 +21,7 @@ struct FEnemySpawnData
 	int32 endIndex;
 
 	UPROPERTY(EditAnywhere)
-	float timerThingy;
+	float spawnTime;
 };
 
 USTRUCT()
