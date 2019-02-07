@@ -87,7 +87,7 @@ void AOrcMustFryGameMode::EndWave()
 	waveStarted = false;
 	if (currentWaveIndex < waveList.Num())
 	{
-		currentWaveIndex++;
+		++currentWaveIndex;
 	}	
 }
 
